@@ -1,0 +1,49 @@
+===============================================================================
+  NOTAS DE DESARROLLO Y ARQUITECTURA — ROFRAMED-TURNOS
+
+===============================================================================
+
+1. VISIÓN GENERAL DEL PROYECTO
+ROFRAMED es una aplicación web SPA (Single Page Application) diseñada como un 
+kiosco dispensador de turnos para un laboratorio clínico ficticio. El objetivo 
+principal del proyecto fue construir una solución ligera, de alta accesibilidad, 
+robusta y completamente libre de dependencias o frameworks externos.
+
+2. ARQUITECTURA DE SOFTWARE (ES MODULES)
+Para garantizar un código modular, mantenible y escalable, se implementó una 
+arquitectura en capas bajo el directorio /src utilizando JavaScript Moderno:
+
+• /src/config (categorias.js): 
+  Almacena la estructura de datos centralizada de las categorías de atención, 
+  definiendo prefijos, descripciones y prioridades (e.g., Embarazadas, Asegurados).
+
+• /src/store (state.js): 
+  Gestiona el estado global de los contadores. Implementa persistencia de datos 
+  con LocalStorage para evitar la pérdida de la secuencia ante cierres o recargas.
+
+• /src/components (clock.js, ticket.js): 
+  Módulos encapsulados encargados de la interfaz visual dinámica. Controlan el 
+  reloj en tiempo real y la simulación/renderizado modal del ticket impreso.
+
+• /src/services (voice.js): 
+  Capa de servicios encargada de la síntesis de voz mediante la Web Speech API, 
+  brindando confirmación auditiva por altavoz cada vez que se emite un turno.
+
+• /src/app.js: 
+  Punto de entrada principal (Orquestador). Captura los eventos del DOM, conecta 
+  el estado global con los componentes y dispara los servicios.
+
+3. DECISIONES TÉCNICAS CLAVE
+
+• Arquitectura Zero-Dependencies: 
+  Desarrollado 100% en Vanilla JavaScript para garantizar máxima velocidad de 
+  ejecución, un bundle footprint mínimo y baja latencia en dispositivos tipo kiosco.
+
+• Sistema de Diseño CSS3 Avanzado: 
+  Uso de Design Tokens (CSS Variables) para estandarizar la paleta corporativa 
+  y espaciados, estructurado con la metodología BEM y adaptabilidad responsive.
+
+• Accesibilidad (a11y) y Usabilidad: 
+  Soporte integral para lectura por voz, semántica HTML5, atributos ARIA 
+  (aria-live, aria-hidden) y soporte nativo para 'prefers-reduced-motion'.
+===============================================================================

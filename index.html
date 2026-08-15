@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROFRAMED · Generar Turno</title>
+
+  <!-- Tipografía: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER: BARRA SUPERIOR ================= -->
+  <header class="topbar">
+    <div class="topbar__brand">
+      <div class="topbar__logo" aria-hidden="true">RF</div>
+      <div class="topbar__brand-text">
+        <p class="topbar__brand-name">ROFRAMED</p>
+        <p class="topbar__brand-sub">Laboratorio Clínico</p>
+      </div>
+    </div>
+
+    <div class="topbar__clock" id="reloj" aria-live="off">
+      <span class="topbar__time" id="reloj-hora">00:00:00</span>
+      <span class="topbar__date" id="reloj-fecha">-- de ---- de ----</span>
+    </div>
+
+    <div class="topbar__status">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span>En línea</span>
+    </div>
+  </header>
+
+  <!-- ================= CONTENEDOR PRINCIPAL ================= -->
+  <main class="layout">
+    <!-- ================= MÓDULO: DISPENSADOR DE TURNOS ================= -->
+    <section class="panel panel--dispensador" aria-labelledby="titulo-modulo-b">
+      <h2 id="titulo-modulo-b" class="panel__titulo">Generar Nuevo Turno</h2>
+      <p class="panel__subtitulo">Seleccione la categoría de atención</p>
+
+      <div class="dispensador__grid" id="dispensador-grid">
+        <!-- Botones generados dinámicamente -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= TICKET EMITIDO ================= -->
+  <div class="ticket-overlay" id="ticket-overlay" aria-hidden="true">
+    <div class="ticket" id="ticket" role="status" aria-live="polite">
+      <p class="ticket__marca">ROFRAMED</p>
+      <p class="ticket__linea">Laboratorio Clínico</p>
+      <hr class="ticket__separador" />
+      <p class="ticket__categoria" id="ticket-categoria">Categoría</p>
+      <p class="ticket__numero" id="ticket-numero">000-000</p>
+      <hr class="ticket__separador" />
+      <p class="ticket__nota">Conserve este turno y espere a ser llamado</p>
+      <p class="ticket__hora" id="ticket-hora">00:00:00</p>
+    </div>
+  </div>
+
+  <!-- ================= PIE DE PÁGINA ================= -->
+  <footer class="footer">
+    <p>ROFRAMED · Sistema de Gestión de Turnos — Pantalla de generación de turnos</p>
+  </footer>
+
+  <!-- MÓDULO PRINCIPAL DE ENTRADA -->
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

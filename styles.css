@@ -1,0 +1,389 @@
+/* ================= VARIABLES GLOBALES (Design Tokens) ================= */
+:root {
+  --color-primario: #0B2545;
+  --color-primario-claro: #163B6B;
+  --color-primario-oscuro: #071A33;
+  --color-acento: #2F9BFF;
+  --color-acento-oscuro: #1478D6;
+  --color-acento-suave: #E4F1FF;
+
+  --color-fondo: #EEF3F9;
+  --color-superficie: #FFFFFF;
+  --color-superficie-alt: #F5F8FC;
+
+  --color-texto: #142335;
+  --color-texto-muted: #5B6B80;
+  --color-texto-invertido: #FFFFFF;
+
+  --color-borde: #DCE4EE;
+  --color-exito: #1E9E63;
+  --color-exito-oscuro: #167C4E;
+  --color-advertencia: #E0A72E;
+  --color-peligro: #D64545;
+
+  --fuente-principal: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radio-sm: 8px;
+  --radio-md: 14px;
+  --radio-lg: 22px;
+  --radio-full: 999px;
+
+  --sombra-sm: 0 2px 6px rgba(11, 37, 69, 0.07);
+  --sombra-md: 0 10px 28px rgba(11, 37, 69, 0.10);
+  --sombra-lg: 0 18px 48px rgba(11, 37, 69, 0.16);
+  --sombra-foco: 0 0 0 4px rgba(47, 155, 255, 0.25);
+
+  --transicion-rapida: 0.15s ease;
+  --transicion-normal: 0.25s ease;
+  --transicion-lenta: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ================= RESET BÁSICO ================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: var(--sombra-foco);
+  border-radius: var(--radio-sm);
+}
+
+/* ================= HEADER: BARRA SUPERIOR ================= */
+.topbar {
+  background: linear-gradient(120deg, var(--color-primario) 0%, var(--color-primario-oscuro) 100%);
+  color: var(--color-texto-invertido);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 2rem;
+  box-shadow: var(--sombra-md);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar__logo {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radio-md);
+  background: var(--color-acento);
+  color: var(--color-primario-oscuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.topbar__brand-name {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+}
+
+.topbar__brand-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 500;
+}
+
+.topbar__clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.topbar__time {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.topbar__date {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: capitalize;
+}
+
+.topbar__status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radio-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #35D07F;
+  box-shadow: 0 0 0 0 rgba(53, 208, 127, 0.6);
+  animation: pulso-estado 2s infinite;
+}
+
+@keyframes pulso-estado {
+  0%   { box-shadow: 0 0 0 0 rgba(53, 208, 127, 0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(53, 208, 127, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(53, 208, 127, 0); }
+}
+
+/* ================= LAYOUT PRINCIPAL ================= */
+.layout {
+  flex: 1;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* ================= COMPONENTE: TARJETA / PANEL BASE ================= */
+.panel {
+  background: var(--color-superficie);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-sm);
+  border: 1px solid var(--color-borde);
+  padding: 1.75rem;
+  transition: box-shadow var(--transicion-normal);
+}
+
+.panel:hover {
+  box-shadow: var(--sombra-md);
+}
+
+.panel__titulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  margin-bottom: 0.25rem;
+}
+
+.panel__subtitulo {
+  font-size: 0.85rem;
+  color: var(--color-texto-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ================= MÓDULO B: DISPENSADOR DE TURNOS ================= */
+.panel--dispensador {
+  width: 100%;
+  padding: 2.25rem 2.5rem 2.5rem;
+}
+
+.dispensador__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+.btn-categoria {
+  font-family: inherit;
+  text-align: left;
+  background: var(--color-superficie-alt);
+  border: 1.5px solid var(--color-borde);
+  border-radius: var(--radio-md);
+  padding: 0.85rem 0.95rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color var(--transicion-normal), background var(--transicion-normal), transform var(--transicion-rapida);
+}
+
+.btn-categoria:hover {
+  border-color: var(--color-acento);
+  background: var(--color-acento-suave);
+}
+
+.btn-categoria:active {
+  transform: scale(0.98);
+}
+
+.btn-categoria__prefijo {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-acento-oscuro);
+  background: var(--color-acento-suave);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio-sm);
+}
+
+.btn-categoria__nombre {
+  font-size: 0.87rem;
+  font-weight: 700;
+  color: var(--color-texto);
+  line-height: 1.25;
+}
+
+.btn-categoria--prioritaria {
+  border-color: rgba(224, 167, 46, 0.5);
+  background: linear-gradient(180deg, #FFF7E8 0%, var(--color-superficie-alt) 100%);
+}
+
+.btn-categoria--prioritaria .btn-categoria__prefijo {
+  color: #8A6512;
+  background: #FCEBC2;
+}
+
+/* ================= TICKET (Simulación de impresión) ================= */
+.ticket-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 26, 51, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transicion-normal);
+}
+
+.ticket-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ticket {
+  background: var(--color-superficie);
+  width: min(300px, 85vw);
+  border-radius: var(--radio-sm);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--sombra-lg);
+  transform: translateY(-24px) scale(0.94);
+  opacity: 0;
+  transition: transform var(--transicion-lenta), opacity var(--transicion-lenta);
+}
+
+.ticket-overlay.visible .ticket {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.ticket__marca {
+  font-weight: 800;
+  color: var(--color-primario);
+  letter-spacing: 0.06em;
+}
+
+.ticket__linea {
+  font-size: 0.75rem;
+  color: var(--color-texto-muted);
+  margin-bottom: 0.5rem;
+}
+
+.ticket__separador {
+  border: none;
+  border-top: 1px dashed var(--color-borde);
+  margin: 0.75rem 0;
+}
+
+.ticket__categoria {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ticket__numero {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--color-acento-oscuro);
+  margin: 0.3rem 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket__nota {
+  font-size: 0.78rem;
+  color: var(--color-texto-muted);
+  margin-top: 0.4rem;
+}
+
+.ticket__hora {
+  font-size: 0.72rem;
+  color: var(--color-texto-muted);
+  margin-top: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================= PIE DE PÁGINA ================= */
+.footer {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.78rem;
+  color: var(--color-texto-muted);
+}
+
+/* ================= RESPONSIVIDAD ================= */
+@media (max-width: 640px) {
+  .topbar {
+    flex-wrap: wrap;
+    padding: 0.85rem 1.1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .topbar__clock {
+    order: 3;
+    width: 100%;
+    padding-top: 0.4rem;
+  }
+
+  .layout {
+    padding: 1.1rem;
+  }
+
+  .dispensador__grid {
+    grid-template-columns: 1fr;
+  }
+}
